@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import { User } from './types'
+import { UsersList } from './components/users-list'
 
 function App() {
-  const [data, setData] = useState([])
+  const [users, setUsers] = useState<User[]>([])
 
-  // Fetch data from the API
+  // Fetch users from the API
 
   useEffect(() => {
     fetch('https://randomuser.me/api/?results=100')
       .then((response) => response.json())
-      .then((users) => setData(users.results))
+      .then((users) => setUsers(users.results))
   }, [])
 
   return (
@@ -17,11 +19,9 @@ function App() {
       <h1>
         Lista de usuarios
       </h1>
-      {data.map((user: any) => (
-        <div>
-          {user.name.first}
-        </div>
-      ))}
+      <UsersList
+        users={users}
+      />
     </div>
   )
 }
