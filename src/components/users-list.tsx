@@ -2,10 +2,12 @@ import { User } from "../types"
 
 interface UsersListProps {
   users: User[]
+  showColors: boolean
 };
 
 export const UsersList = ({
-  users
+  users,
+  showColors
 }: UsersListProps) => {
   return (
     <div>
@@ -21,7 +23,9 @@ export const UsersList = ({
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody
+          className={showColors ? 'show_colors' : ''}
+        >
           {users.map((user, index) => {
             return (
               <tr
